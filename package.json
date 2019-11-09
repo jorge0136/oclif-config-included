@@ -1,0 +1,54 @@
+{
+  "name": "oclif-config-included",
+  "description": "oclif command that makes config easy",
+  "version": "0.0.0",
+  "author": "Thomas George @jorge0136",
+  "bin": {
+    "oclif-config-included": "./bin/run"
+  },
+  "bugs": "https://github.com/jorge0136/oclif-config-included/issues",
+  "dependencies": {
+    "@oclif/command": "^1",
+    "@oclif/config": "^1",
+    "@oclif/plugin-help": "^2",
+    "tslib": "^1"
+  },
+  "devDependencies": {
+    "@oclif/test": "^1",
+    "@types/chai": "^4",
+    "@types/mocha": "^5",
+    "@types/node": "^10",
+    "@typescript-eslint/eslint-plugin": "^2.6.1",
+    "@typescript-eslint/parser": "^2.6.1",
+    "chai": "^4",
+    "eslint": "5.16.0",
+    "eslint-plugin-oclif": "^0.1.0",
+    "mocha": "^5",
+    "nyc": "^14",
+    "ts-node": "^8",
+    "typescript": "^3.7.2"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/bin",
+    "/lib"
+  ],
+  "homepage": "https://github.com/jorge0136/oclif-config-included",
+  "keywords": [
+    "oclif"
+  ],
+  "license": "MIT",
+  "main": "lib/index.js",
+  "oclif": {
+    "bin": "oclif-config-included"
+  },
+  "repository": "jorge0136/oclif-config-included",
+  "scripts": {
+    "prepack": "rm -rf lib && tsc -b",
+    "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
+    "lint": "eslint . --ext .ts"
+  },
+  "types": "lib/index.d.ts"
+}

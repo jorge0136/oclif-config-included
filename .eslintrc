@@ -1,0 +1,11 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["oclif"],
+    "parserOptions": {
+        "project": "./tsconfig.json",
+        "sourceType": "module",
+    },
+    "rules": {
+        // Add your rules here
+    }
+}
