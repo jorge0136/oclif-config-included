@@ -48,7 +48,7 @@
   "scripts": {
     "prepack": "rm -rf lib && tsc -b",
     "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint src/* --ext .ts"
   },
   "types": "lib/index.d.ts"
 }
