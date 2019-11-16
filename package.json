@@ -11,6 +11,10 @@
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^2",
+    "cli-ux": "^5.3.3",
+    "conf": "^6.2.0",
+    "enquirer": "^2.3.2",
+    "json-schema-typed": "^7.0.2",
     "tslib": "^1"
   },
   "devDependencies": {

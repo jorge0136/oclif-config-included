@@ -1,9 +1,12 @@
-import {Command, flags} from '@oclif/command'
+import BaseCommand from './base-command'
+import {flags} from '@oclif/command' 
 
-class OclifConfigIncluded extends Command {
+class OclifConfigIncluded extends BaseCommand {
   static description = 'describe the command here'
 
   static flags = {
+    // Boilerplate to used extended command
+    ...BaseCommand.flags,
     // add --version flag to show CLI version
     version: flags.version({char: 'v'}),
     help: flags.help({char: 'h'}),
@@ -13,16 +16,10 @@ class OclifConfigIncluded extends Command {
     force: flags.boolean({char: 'f'}),
   }
 
-  static args = [{name: 'file'}]
-
   async run() {
-    const {args, flags} = this.parse(OclifConfigIncluded)
-
-    const name = flags.name || 'world'
-    this.log(`hello ${name} from ./src/index.ts`)
-    if (args.file && flags.force) {
-      this.log(`you input --force and --file: ${args.file}`)
-    }
+    const {args, flags} = this.parse(OclifConfigIncluded);
+    this.log(this._config);
+    this._config = 1;
   }
 }
 
