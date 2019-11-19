@@ -4,7 +4,7 @@ import * as _ from 'lodash'
 import * as inquirer from 'inquirer';
 
 class OclifConfigIncluded extends Command {
-  static description = 'describe the command here'
+  static description = 'TODO: switch this plugin to use multiple commands'
 
   static flags = {
     help: flags.help({char: 'h'}),
