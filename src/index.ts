@@ -1,12 +1,12 @@
-import BaseCommand from './base-command'
+import Command from './base-command'
 import {flags} from '@oclif/command' 
 
-class OclifConfigIncluded extends BaseCommand {
+class OclifConfigIncluded extends Command {
   static description = 'describe the command here'
 
   static flags = {
     // Boilerplate to used extended command
-    ...BaseCommand.flags,
+    ...Command.flags,
     // add --version flag to show CLI version
     version: flags.version({char: 'v'}),
     help: flags.help({char: 'h'}),
