@@ -11,10 +11,12 @@
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^2",
+    "@types/inquirer": "^6.5.0",
     "@types/js-yaml": "^3.12.1",
+    "chalk": "^3.0.0",
     "cli-ux": "^5.3.3",
     "conf": "^6.2.0",
-    "enquirer": "^2.3.2",
+    "inquirer": "^7.0.0",
     "js-yaml": "^3.13.1",
     "json-schema-typed": "^7.0.2",
     "tslib": "^1"
