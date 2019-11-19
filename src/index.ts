@@ -7,8 +7,6 @@ class OclifConfigIncluded extends Command {
   static description = 'describe the command here'
 
   static flags = {
-    // Boilerplate to use extended command
-    ...Command.flags,
     help: flags.help({char: 'h'}),
     context: flags.string({
       char: 'c',
@@ -21,19 +19,32 @@ class OclifConfigIncluded extends Command {
     
     let userSelectedContext: string
     
+    // TODO: What about no config being set at all? 
+    // TODO: Add a test for that. 
     if (!flags.context)  {
       const userSelection = await inquirer.prompt([{ 
-        name: 'currentContext',
+        name: 'context',
         type: 'list',
         message: 'Select a context:',
         choices: _.map(this.allConfig.contexts, 'name')
       }]);
-      userSelectedContext = userSelection.currentContext;
+      userSelectedContext = userSelection.context;
     }
-    
-    else userSelectedContext = flags.context;
+    else {
+      userSelectedContext = flags.context;
 
-    // Unfortunate need to merge the top level config and the current selection
+      // did the user pass an invalid value by flag? 
+      if(!_.includes(_.map(this.allConfig.contexts, 'name'), userSelectedContext)){
+        
+        this.error(
+          `No current context set for '${userSelectedContext}'. ` + 
+          `Perhaps you want to create a new one with 'config:set'?`,
+          { exit: 1 }
+        );
+      }
+    }
+
+    // Unfortunately there is a need to merge the top level config and the current selection
     // as we can't just update one property of the config as it's currently designed. 
     // I think this is a consequence of using the `set`ter. 
     this.allConfig = {...this.allConfig, ...{currentContext: userSelectedContext}};
