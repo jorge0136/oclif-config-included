@@ -1,5 +1,7 @@
 import Command from './base-command'
-import {flags} from '@oclif/command' 
+import {flags} from '@oclif/command'
+import cli from 'cli-ux';
+import * as _ from 'lodash'
 
 class OclifConfigIncluded extends Command {
   static description = 'describe the command here'
@@ -7,20 +9,34 @@ class OclifConfigIncluded extends Command {
   static flags = {
     // Boilerplate to used extended command
     ...Command.flags,
-    // add --version flag to show CLI version
-    version: flags.version({char: 'v'}),
     help: flags.help({char: 'h'}),
-    // flag with a value (-n, --name=VALUE)
-    name: flags.string({char: 'n', description: 'name to print'}),
-    // flag with no value (-f, --force)
-    force: flags.boolean({char: 'f'}),
+    context: flags.string({
+      char: 'c',
+      description: 'Current config to use'
+    })
   }
 
   async run() {
     const {args, flags} = this.parse(OclifConfigIncluded);
-    this.log(this._config);
-    this._config = 1;
+    
+    let userSelectedContext: string
+    
+    if (!flags.context)  {
+      this.log('Your current contexts are:\n')
+      _.forEach(this.allConfig.contexts, (config) => { console.log(config.name) });
+      userSelectedContext = await cli.prompt('Which context do you wish to use?')
+    }
+
+    else userSelectedContext = flags.context;
+
+    console.log(userSelectedContext);
+
+    this.allConfig = {...this.allConfig, ...{currentContext: userSelectedContext}};
+    this.log(JSON.stringify(this.allConfig))
+    this.log(JSON.stringify(this.activeConfig));
   }
 }
 
 export = OclifConfigIncluded
+
+

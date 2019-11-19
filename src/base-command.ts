@@ -3,7 +3,7 @@ import * as Conf from 'conf';
 import * as yaml from 'js-yaml';
 import * as _ from 'lodash';
 
-import * as defaultConfig from './default-config-schema';
+import * as defaultConfig from './base-config';
 
 export default abstract class extends Command {
 
@@ -12,22 +12,25 @@ export default abstract class extends Command {
     serialize: yaml.safeDump,
     deserialize: yaml.safeLoad
   })
-  
-  get _config() { return this.conf.get('application-config'); };
-  
-  set _config(configToSet: any){ this.conf.set('application-config', configToSet); };
 
-  init_default_config() {
-    this.conf.set('application-config', defaultConfig);
-  }
+  get allConfig() { return this.conf.get('application-config'); };
+  set allConfig(configToSet: any){ this.conf.set('application-config', configToSet); };
 
-  destroy_config() {
+  destroyAllConfig() {
     this.conf.delete('application-config');
   }
 
+  initAllConfigDefault() {
+    this.conf.set('application-config', defaultConfig.default);
+  }
+
+  get activeConfig() { 
+    return _.find(this.allConfig.contexts, ['name', this.allConfig.currentContext])
+  }
+
   async init() {
-    if (!this._config) {
-      this.init_default_config();
+    if (!this.allConfig) {
+      this.initAllConfigDefault();
     }
   }
 }
