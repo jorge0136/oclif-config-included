@@ -17,7 +17,7 @@ class OclifConfigIncluded extends Command {
   }
 
   async run() {
-    const {args, flags} = this.parse(OclifConfigIncluded);
+    const { flags } = this.parse(OclifConfigIncluded);
     
     let userSelectedContext: string
     
@@ -31,6 +31,9 @@ class OclifConfigIncluded extends Command {
 
     console.log(userSelectedContext);
 
+    // Unfortunate need to merge the top level config and the current selection
+    // as we can't just update one property of the config as it's currently designed. 
+    // I think this is a consequence of using the `set`ter. 
     this.allConfig = {...this.allConfig, ...{currentContext: userSelectedContext}};
     this.log(JSON.stringify(this.allConfig))
     this.log(JSON.stringify(this.activeConfig));

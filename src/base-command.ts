@@ -1,4 +1,4 @@
-import Command, {flags} from '@oclif/command';
+import Command from '@oclif/command';
 import * as Conf from 'conf';
 import * as yaml from 'js-yaml';
 import * as _ from 'lodash';
